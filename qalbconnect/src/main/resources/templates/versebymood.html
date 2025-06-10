@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qalb Connect - Verses by Mood</title>
+    <link rel="stylesheet" th:href="@{/css/vbm.css}">
+</head>
+<body>
+    <a th:href="@{/home}">
+        <button style="box-shadow: 0 4px 6px rgba(191, 222, 204, 0.3); color: #0a1d15; background: #bfdecc; border: none; padding: 10px 20px; font-size: 16px; border-radius: 5px; cursor: pointer;">
+            &lt;&lt;&lt;
+        </button>
+    </a>
+    
+    <div class="container">
+        <h1>Quranic Verses by Mood</h1>
+        
+        <div class="mood-selector">
+            <h2>Select Your Current Mood</h2>
+            <form id="moodForm" th:action="@{/versebymood/getVerse}" method="post">
+                <input type="hidden" id="selectedMoodInput" name="mood" th:value="${selectedMood}" />
+                
+                <div class="mood-grid">
+                    <button class="mood-btn" 
+                            th:each="moodOption : ${moods}" 
+                            th:data-mood="${moodOption}" 
+                            th:text="${moodOption}"></button>
+                </div>
+            </form>
+        </div>
+
+        <div id="verse-display" class="verse-container">
+            <p th:if="${message}" class="message" th:text="${message}"></p>
+            
+            <div th:if="${verseTextFormatted}" th:utext="${verseTextFormatted}">
+                </div>
+            
+            <div th:unless="${verseTextFormatted}">
+                <p class="verse-text" th:text="${verseText}"></p>
+                <p class="verse-reference" th:text="${verseReference}"></p>
+            </div>
+        </div>
+    </div>
+
+    <script th:src="@{/js/vbm.js}"></script>
+</body>
+</html>

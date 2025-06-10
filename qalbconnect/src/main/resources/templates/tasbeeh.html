@@ -1,74 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Qalb Connect - Tasbeeh Counter</title>
-    <style>
-        /* Basic inline CSS for the Tasbeeh Counter for quick setup */
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background-color: #f0f0f0;
-            margin: 0;
-        }
-        .container {
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-        h1 {
-            color: #333;
-            margin-bottom: 20px;
-        }
-        .counter-display p {
-            font-size: 1.2em;
-            margin: 10px 0;
-        }
-        .counter-display span {
-            font-weight: bold;
-            color: #007bff;
-        }
-        .buttons {
-            margin-top: 20px;
-        }
-        .buttons form {
-            display: inline-block;
-            margin: 0 5px;
-        }
-        .buttons button {
-            background-color: #28a745;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1em;
-            transition: background-color 0.3s ease;
-        }
-        .buttons button:hover {
-            background-color: #218838;
-        }
-        /* Specific styles for Reset and Undo buttons */
-        form button[type="submit"]:nth-of-type(2) { /* Targeting the second button in a form */
-            background-color: #dc3545;
-        }
-        form button[type="submit"]:nth-of-type(2):hover {
-            background-color: #c82333;
-        }
-        form button[type="submit"]:nth-of-type(3) { /* Targeting the third button in a form */
-            background-color: #ffc107;
-            color: #333;
-        }
-        form button[type="submit"]:nth-of-type(3):hover {
-            background-color: #e0a800;
-        }
-    </style>
+    <link rel="stylesheet" th:href="@{/css/tc.css}">
 </head>
 <body>
     <div class="container">
@@ -76,22 +12,26 @@
 
         <div class="counter-display">
             <p>Current Count: <span th:text="${currentCount}">0</span></p>
-            <!-- <p>History: <span th:text="${history}">No history</span></p> -->
-        </div>
+            </div>
 
-        <div class="buttons">
-            <form th:action="@{/tasbeehcounter/increment}" method="post">
-                <button type="submit">Increment</button>
+        <div class="mood-grid"> <form th:action="@{/tasbeehcounter/increment}" method="post">
+                <button type="submit" class="mood-btn">Increment</button>
             </form>
             <form th:action="@{/tasbeehcounter/reset}" method="post">
-                <button type="submit">Reset</button>
+                <button type="submit" class="mood-btn">Reset</button>
             </form>
             <form th:action="@{/tasbeehcounter/undo}" method="post">
-                <button type="submit">Undo</button>
+                <button type="submit" class="mood-btn">Undo</button>
             </form>
         </div>
 
-        <p><a th:href="@{/home}">Back to Home</a></p>
+        <p style="text-align: center; margin-top: 30px;">
+            <a th:href="@{/home}">
+                <button style="box-shadow: 0 4px 6px rgba(191, 222, 204, 0.3); color: #0a1d15; background: #bfdecc; border: none; padding: 10px 20px; font-size: 16px; border-radius: 5px; cursor: pointer;">
+                    Back to Home
+                </button>
+            </a>
+        </p>
     </div>
-</body>
+    </body>
 </html>
