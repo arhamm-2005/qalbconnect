@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stories of Prophets</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+        /* Specific styles for this page */
+        .prophet-list {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive grid */
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .prophet-list li {
+            background-color: #0d2b20; /* Slightly lighter shade for list items */
+            border: 1px solid #bfdecc;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .prophet-list li:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(191, 222, 204, 0.4);
+        }
+        .prophet-list a {
+            color: #bfdecc;
+            text-decoration: none;
+            font-weight: bold;
+            display: block;
+        }
+        .prophet-list a:hover {
+            color: #ffffff;
+        }
+        .error-message {
+            color: #ff6347; /* Tomato color for errors */
+            background-color: #3b0f0f;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Stories of Prophets</h1>
+
+        <div th:if="${errorMessage}" class="error-message">
+            <p th:text="${errorMessage}"></p>
+        </div>
+
+        <h2>Select a Prophet to read their story:</h2>
+        <ul class="prophet-list">
+            <li th:each="prophetName : ${prophetNames}">
+                <a th:href="@{/prophets/story(name=${prophetName})}" th:text="${prophetName}"></a>
+            </li>
+        </ul>
+
+        <p style="text-align: center; margin-top: 30px;">
+            <a href="/home">
+                <button style="box-shadow: 0 4px 6px rgba(191, 222, 204, 0.3); color: #0a1d15; background: #bfdecc; border: none; padding: 10px 20px; font-size: 16px; border-radius: 5px; cursor: pointer;">
+                    Back to Home
+                </button>
+            </a>
+        </p>
+    </div>
+</body>
+</html>
